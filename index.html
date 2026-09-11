@@ -1,2575 +1,662 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <title>AP Visual | Digital Creative Agency</title>
-
-    <meta name="description"
-        content="AP Visual is a digital creative agency offering website development, UX/UI design, social media management, video editing, graphic design, AI content creation, branding and content creation.">
-
-    <style>
-        /* =========================
-           ROOT
-        ========================== */
-
-        :root {
-            --bg: #080807;
-            --bg-soft: #10100e;
-            --card: rgba(255, 255, 255, 0.045);
-            --card-hover: rgba(255, 255, 255, 0.075);
-
-            --gold: #D4AF37;
-            --gold-light: #F3D77A;
-            --gold-dark: #9C7A18;
-
-            --white: #ffffff;
-            --text: #f5f5f5;
-            --muted: #a5a5a5;
-
-            --border: rgba(212, 175, 55, 0.18);
-
-            --radius: 22px;
-            --transition: 0.35s ease;
-        }
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        html {
-            scroll-behavior: smooth;
-        }
-
-        body {
-            font-family: Arial, Helvetica, sans-serif;
-            background:
-                radial-gradient(circle at 15% 10%, rgba(212,175,55,0.10), transparent 28%),
-                radial-gradient(circle at 85% 80%, rgba(212,175,55,0.07), transparent 30%),
-                var(--bg);
-
-            color: var(--text);
-            line-height: 1.6;
-            overflow-x: hidden;
-        }
-
-        a {
-            text-decoration: none;
-            color: inherit;
-        }
-
-        img {
-            max-width: 100%;
-        }
-
-        .container {
-            width: min(1180px, 92%);
-            margin: auto;
-        }
-
-
-        /* =========================
-           NAVBAR
-        ========================== */
-
-        header {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            z-index: 1000;
-
-            background: rgba(8, 8, 7, 0.72);
-            backdrop-filter: blur(18px);
-            -webkit-backdrop-filter: blur(18px);
-
-            border-bottom: 1px solid transparent;
-            transition: var(--transition);
-        }
-
-        header.scrolled {
-            border-bottom: 1px solid var(--border);
-            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.35);
-        }
-
-        .navbar {
-            min-height: 78px;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            gap: 30px;
-        }
-
-        /* YOUR LOGO */
-
-        .logo {
-            display: flex;
-            align-items: center;
-            min-width: 130px;
-        }
-
-        .logo img {
-            height: 48px;
-            width: auto;
-            max-width: 180px;
-            object-fit: contain;
-            display: block;
-        }
-
-        nav {
-            display: flex;
-            align-items: center;
-            gap: 28px;
-        }
-
-        nav a {
-            color: #d8d8d8;
-            font-size: 14px;
-            font-weight: 600;
-            position: relative;
-            transition: var(--transition);
-        }
-
-        nav a::after {
-            content: "";
-            position: absolute;
-            left: 0;
-            bottom: -7px;
-            width: 0;
-            height: 2px;
-            background: var(--gold);
-            transition: var(--transition);
-        }
-
-        nav a:hover {
-            color: var(--gold-light);
-        }
-
-        nav a:hover::after {
-            width: 100%;
-        }
-
-        .nav-btn {
-            padding: 11px 18px;
-            border: 1px solid var(--gold);
-            border-radius: 30px;
-            color: var(--gold-light);
-        }
-
-        .nav-btn:hover {
-            background: var(--gold);
-            color: #000;
-        }
-
-        .nav-btn::after {
-            display: none;
-        }
-
-        .menu-toggle {
-            display: none;
-            background: none;
-            border: none;
-            color: var(--gold);
-            font-size: 28px;
-            cursor: pointer;
-        }
-
-
-        /* =========================
-           HERO
-        ========================== */
-
-        .hero {
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            position: relative;
-            padding: 130px 0 80px;
-        }
-
-        .hero::before {
-            content: "";
-            position: absolute;
-            width: 500px;
-            height: 500px;
-            background: rgba(212,175,55,0.10);
-            filter: blur(120px);
-            border-radius: 50%;
-            top: 10%;
-            right: -150px;
-            pointer-events: none;
-        }
-
-        .hero-content {
-            max-width: 850px;
-            position: relative;
-            z-index: 2;
-        }
-
-        .eyebrow {
-            display: inline-flex;
-            align-items: center;
-            gap: 9px;
-
-            color: var(--gold-light);
-            font-size: 13px;
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-
-            margin-bottom: 20px;
-        }
-
-        .eyebrow::before {
-            content: "";
-            width: 30px;
-            height: 1px;
-            background: var(--gold);
-        }
-
-        .hero h1 {
-            font-size: clamp(48px, 8vw, 92px);
-            line-height: 0.98;
-            letter-spacing: -4px;
-            margin-bottom: 28px;
-        }
-
-        .hero h1 span {
-            background: linear-gradient(
-                90deg,
-                var(--gold),
-                var(--gold-light),
-                var(--gold)
-            );
-
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-
-        .hero p {
-            max-width: 650px;
-            color: var(--muted);
-            font-size: 18px;
-            margin-bottom: 38px;
-        }
-
-        .hero-buttons {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 14px;
-        }
-
-        .btn {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-
-            padding: 14px 24px;
-            border-radius: 40px;
-            font-size: 14px;
-            font-weight: 700;
-
-            transition: var(--transition);
-        }
-
-        .btn-primary {
-            background: linear-gradient(
-                135deg,
-                var(--gold),
-                var(--gold-light)
-            );
-
-            color: #090909;
-            box-shadow: 0 12px 35px rgba(212,175,55,0.18);
-        }
-
-        .btn-primary:hover {
-            transform: translateY(-4px);
-            box-shadow: 0 18px 45px rgba(212,175,55,0.30);
-        }
-
-        .btn-outline {
-            border: 1px solid rgba(212,175,55,0.45);
-            color: var(--gold-light);
-        }
-
-        .btn-outline:hover {
-            background: rgba(212,175,55,0.08);
-            transform: translateY(-4px);
-        }
-
-
-        /* =========================
-           GENERAL SECTION
-        ========================== */
-
-        section {
-            padding: 110px 0;
-            position: relative;
-        }
-
-        .section-heading {
-            margin-bottom: 55px;
-        }
-
-        .section-heading h2 {
-            font-size: clamp(34px, 5vw, 58px);
-            line-height: 1;
-            margin-bottom: 15px;
-            letter-spacing: -2px;
-        }
-
-        .section-heading p {
-            color: var(--muted);
-            max-width: 650px;
-        }
-
-        .section-label {
-            color: var(--gold-light);
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            font-size: 12px;
-            font-weight: 700;
-            margin-bottom: 13px;
-        }
-
-
-        /* =========================
-           ABOUT
-        ========================== */
-
-        .about-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 70px;
-            align-items: center;
-        }
-
-        .about-text p {
-            color: var(--muted);
-            margin-bottom: 18px;
-            font-size: 16px;
-        }
-
-        .about-box {
-            min-height: 350px;
-            border: 1px solid var(--border);
-            border-radius: var(--radius);
-
-            background:
-                linear-gradient(
-                    145deg,
-                    rgba(212,175,55,0.09),
-                    rgba(255,255,255,0.025)
-                );
-
-            display: flex;
-            align-items: center;
-            justify-content: center;
-
-            position: relative;
-            overflow: hidden;
-        }
-
-        .about-box::before {
-            content: "AP";
-            position: absolute;
-
-            font-size: 180px;
-            font-weight: 900;
-
-            color: rgba(212,175,55,0.05);
-
-            letter-spacing: -15px;
-        }
-
-        .about-center {
-            text-align: center;
-            position: relative;
-            z-index: 2;
-        }
-
-        .about-center strong {
-            display: block;
-            font-size: 58px;
-            color: var(--gold);
-        }
-
-        .about-center span {
-            color: var(--muted);
-            text-transform: uppercase;
-            letter-spacing: 4px;
-            font-size: 12px;
-        }
-
-
-        /* =========================
-           SERVICES
-        ========================== */
-
-        .services-grid {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 18px;
-        }
-
-        .service-card {
-            min-height: 230px;
-            padding: 28px;
-
-            border: 1px solid var(--border);
-            border-radius: var(--radius);
-
-            background: var(--card);
-
-            position: relative;
-            overflow: hidden;
-
-            transition: var(--transition);
-        }
-
-        .service-card::before {
-            content: "";
-            position: absolute;
-
-            width: 120px;
-            height: 120px;
-
-            background: rgba(212,175,55,0.09);
-            filter: blur(35px);
-
-            top: -60px;
-            right: -60px;
-
-            transition: var(--transition);
-        }
-
-        .service-card:hover {
-            transform: translateY(-8px);
-            background: var(--card-hover);
-            border-color: rgba(212,175,55,0.45);
-        }
-
-        .service-card:hover::before {
-            transform: scale(1.6);
-        }
-
-        .service-number {
-            color: var(--gold);
-            font-size: 13px;
-            font-weight: 700;
-            margin-bottom: 28px;
-        }
-
-        .service-card h3 {
-            font-size: 20px;
-            margin-bottom: 12px;
-        }
-
-        .service-card p {
-            color: var(--muted);
-            font-size: 14px;
-        }
-
-
-        /* =========================
-           PROJECTS
-        ========================== */
-
-        .projects-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 22px;
-        }
-
-        .project-card {
-            border: 1px solid var(--border);
-            border-radius: var(--radius);
-
-            background: var(--card);
-
-            overflow: hidden;
-            transition: transform 0.2s ease, border 0.3s ease;
-
-            transform-style: preserve-3d;
-        }
-
-        .project-card:hover {
-            border-color: rgba(212,175,55,0.50);
-        }
-
-        .project-image {
-            height: 240px;
-            position: relative;
-            overflow: hidden;
-
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .project-image::before {
-            content: "";
-            position: absolute;
-            width: 180px;
-            height: 180px;
-            border-radius: 50%;
-
-            background: rgba(212,175,55,0.16);
-            filter: blur(45px);
-        }
-
-        .project-image::after {
-            content: "";
-            position: absolute;
-            inset: 0;
-
-            background: linear-gradient(
-                to top,
-                rgba(0,0,0,0.60),
-                transparent
-            );
-        }
-
-        .project-label {
-            position: absolute;
-            left: 20px;
-            bottom: 18px;
-
-            z-index: 2;
-
-            color: #fff;
-            font-size: 11px;
-            font-weight: 700;
-
-            text-transform: uppercase;
-            letter-spacing: 2px;
-        }
-
-
-        /* WEBSITE VISUAL */
-
-        .project-web {
-            background:
-                radial-gradient(
-                    circle at 30% 30%,
-                    rgba(212,175,55,0.25),
-                    transparent 35%
-                ),
-                linear-gradient(
-                    135deg,
-                    #14130e,
-                    #050505
-                );
-        }
-
-        .web-window {
-            width: 68%;
-            height: 60%;
-            background: #111;
-            border: 1px solid rgba(212,175,55,0.35);
-            border-radius: 12px;
-
-            box-shadow: 0 20px 60px rgba(0,0,0,0.7);
-
-            position: relative;
-            z-index: 1;
-        }
-
-        .web-top {
-            height: 22px;
-            border-bottom: 1px solid rgba(255,255,255,0.08);
-            display: flex;
-            align-items: center;
-            gap: 5px;
-            padding-left: 9px;
-        }
-
-        .web-dot {
-            width: 5px;
-            height: 5px;
-            border-radius: 50%;
-            background: var(--gold);
-        }
-
-        .web-body {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            height: calc(100% - 22px);
-        }
-
-        .web-body span {
-            font-size: 35px;
-            font-weight: 900;
-            color: var(--gold);
-        }
-
-
-        /* GRAPHIC */
-
-        .project-graphic {
-            background:
-                linear-gradient(
-                    135deg,
-                    #0b0b0b,
-                    #201b0d
-                );
-        }
-
-        .graphic-text {
-            font-size: 42px;
-            font-weight: 900;
-            letter-spacing: -3px;
-            color: transparent;
-
-            -webkit-text-stroke: 1px var(--gold);
-
-            transform: rotate(-8deg);
-
-            position: relative;
-            z-index: 1;
-        }
-
-
-        /* SOCIAL */
-
-        .project-social {
-            background:
-                radial-gradient(
-                    circle at center,
-                    rgba(212,175,55,0.24),
-                    transparent 50%
-                ),
-                #0b0b0b;
-        }
-
-        .social-card {
-            width: 55%;
-            height: 75%;
-
-            border-radius: 18px;
-
-            background:
-                linear-gradient(
-                    160deg,
-                    #17130a,
-                    #050505
-                );
-
-            border: 1px solid rgba(212,175,55,0.35);
-
-            box-shadow: 0 20px 50px rgba(0,0,0,0.65);
-
-            display: flex;
-            align-items: center;
-            justify-content: center;
-
-            position: relative;
-            z-index: 1;
-        }
-
-        .social-card span {
-            font-weight: 900;
-            font-size: 25px;
-            color: var(--gold-light);
-        }
-
-
-        /* BRANDING */
-
-        .project-branding {
-            background:
-                linear-gradient(
-                    145deg,
-                    #17130a,
-                    #050505
-                );
-        }
-
-        .brand-logo {
-            width: 105px;
-            height: 105px;
-
-            border: 1px solid var(--gold);
-
-            display: flex;
-            align-items: center;
-            justify-content: center;
-
-            border-radius: 20px;
-
-            transform: rotate(8deg);
-
-            position: relative;
-            z-index: 1;
-
-            box-shadow:
-                0 0 35px rgba(212,175,55,0.15);
-        }
-
-        .brand-logo span {
-            font-size: 48px;
-            font-weight: 900;
-            color: var(--gold);
-        }
-
-
-        /* AI */
-
-        .project-ai {
-            background:
-                radial-gradient(
-                    circle,
-                    rgba(212,175,55,0.22),
-                    transparent 55%
-                ),
-                #050505;
-        }
-
-        .ai-symbol {
-            font-size: 72px;
-            font-weight: 900;
-
-            color: var(--gold-light);
-
-            text-shadow:
-                0 0 20px rgba(212,175,55,0.35);
-
-            position: relative;
-            z-index: 1;
-        }
-
-
-        /* COMING */
-
-        .project-coming {
-            background:
-                linear-gradient(
-                    135deg,
-                    #0c0c0b,
-                    #19150a
-                );
-        }
-
-        .coming-symbol {
-            font-size: 75px;
-            color: var(--gold);
-
-            position: relative;
-            z-index: 1;
-
-            animation: float 3s ease-in-out infinite;
-        }
-
-        @keyframes float {
-            0%,100% {
-                transform: translateY(0);
-            }
-
-            50% {
-                transform: translateY(-12px);
-            }
-        }
-
-        .project-info {
-            padding: 25px;
-        }
-
-        .project-info h3 {
-            font-size: 20px;
-            margin-bottom: 8px;
-        }
-
-        .project-info p {
-            color: var(--muted);
-            font-size: 14px;
-            margin-bottom: 18px;
-        }
-
-        .project-link {
-            color: var(--gold-light);
-            font-size: 13px;
-            font-weight: 700;
-        }
-
-        .project-link:hover {
-            text-decoration: underline;
-        }
-
-
-        /* =========================
-           STATS
-        ========================== */
-
-        .stats {
-            border-top: 1px solid var(--border);
-            border-bottom: 1px solid var(--border);
-        }
-
-        .stats-grid {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-        }
-
-        .stat {
-            text-align: center;
-            padding: 35px 20px;
-            border-right: 1px solid var(--border);
-        }
-
-        .stat:last-child {
-            border-right: none;
-        }
-
-        .stat strong {
-            display: block;
-            font-size: 42px;
-            color: var(--gold-light);
-            margin-bottom: 4px;
-        }
-
-        .stat span {
-            color: var(--muted);
-            font-size: 13px;
-        }
-
-
-        /* =========================
-           WHY AP VISUAL
-        ========================== */
-
-        .why-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 20px;
-        }
-
-        .why-card {
-            padding: 35px;
-
-            border-radius: var(--radius);
-            border: 1px solid var(--border);
-
-            background:
-                linear-gradient(
-                    145deg,
-                    rgba(212,175,55,0.07),
-                    rgba(255,255,255,0.025)
-                );
-        }
-
-        .why-card span {
-            color: var(--gold);
-            font-size: 25px;
-        }
-
-        .why-card h3 {
-            margin: 20px 0 10px;
-            font-size: 20px;
-        }
-
-        .why-card p {
-            color: var(--muted);
-            font-size: 14px;
-        }
-
-
-        /* =========================
-           CTA
-        ========================== */
-
-        .cta-box {
-            border: 1px solid rgba(212,175,55,0.35);
-            border-radius: 30px;
-
-            padding: 70px 50px;
-
-            text-align: center;
-
-            background:
-                radial-gradient(
-                    circle at center,
-                    rgba(212,175,55,0.13),
-                    transparent 60%
-                ),
-                rgba(255,255,255,0.025);
-        }
-
-        .cta-box h2 {
-            font-size: clamp(35px, 5vw, 60px);
-            line-height: 1;
-            margin-bottom: 18px;
-        }
-
-        .cta-box p {
-            color: var(--muted);
-            max-width: 600px;
-            margin: 0 auto 30px;
-        }
-
-
-        /* =========================
-           CONTACT
-        ========================== */
-
-        .contact-grid {
-            display: grid;
-            grid-template-columns: 0.8fr 1.2fr;
-            gap: 50px;
-        }
-
-        .contact-info h3 {
-            font-size: 28px;
-            margin-bottom: 14px;
-        }
-
-        .contact-info > p {
-            color: var(--muted);
-            margin-bottom: 30px;
-        }
-
-        .contact-item {
-            margin-bottom: 20px;
-        }
-
-        .contact-item small {
-            display: block;
-            color: var(--gold);
-            text-transform: uppercase;
-            font-size: 10px;
-            letter-spacing: 2px;
-            margin-bottom: 4px;
-        }
-
-        .contact-item a {
-            color: #eee;
-        }
-
-        .contact-item a:hover {
-            color: var(--gold-light);
-        }
-
-        .contact-form {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 16px;
-        }
-
-        .form-group {
-            display: flex;
-            flex-direction: column;
-            gap: 7px;
-        }
-
-        .form-group.full {
-            grid-column: 1 / -1;
-        }
-
-        .form-group label {
-            font-size: 12px;
-            color: #ccc;
-        }
-
-        input,
-        select,
-        textarea {
-            width: 100%;
-
-            padding: 14px 15px;
-
-            background: rgba(255,255,255,0.04);
-            border: 1px solid rgba(255,255,255,0.10);
-
-            border-radius: 12px;
-
-            color: white;
-            outline: none;
-
-            font-family: inherit;
-
-            transition: var(--transition);
-        }
-
-        select option {
-            background: #111;
-            color: white;
-        }
-
-        textarea {
-            min-height: 140px;
-            resize: vertical;
-        }
-
-        input:focus,
-        select:focus,
-        textarea:focus {
-            border-color: rgba(212,175,55,0.65);
-            box-shadow: 0 0 0 3px rgba(212,175,55,0.06);
-        }
-
-        .form-submit {
-            grid-column: 1 / -1;
-            margin-top: 5px;
-        }
-
-        .form-message {
-            grid-column: 1 / -1;
-            color: var(--gold-light);
-            font-size: 13px;
-            display: none;
-        }
-
-
-        /* =========================
-           FOOTER
-        ========================== */
-
-        footer {
-            padding: 35px 0;
-            border-top: 1px solid var(--border);
-            margin-top: 30px;
-        }
-
-        .footer-inner {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            gap: 20px;
-        }
-
-        .footer-brand {
-            color: var(--muted);
-            font-size: 13px;
-        }
-
-        .footer-brand strong {
-            color: var(--gold-light);
-        }
-
-        .footer-social {
-            display: flex;
-            gap: 20px;
-        }
-
-        .footer-social a {
-            color: var(--muted);
-            font-size: 13px;
-        }
-
-        .footer-social a:hover {
-            color: var(--gold-light);
-        }
-
-
-        /* =========================
-           REVEAL ANIMATION
-        ========================== */
-
-        .reveal {
-            opacity: 0;
-            transform: translateY(30px);
-            transition: opacity 0.8s ease, transform 0.8s ease;
-        }
-
-        .reveal.active {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-
-        /* =========================
-           RESPONSIVE
-        ========================== */
-
-        @media (max-width: 1000px) {
-
-            .services-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
-
-            .projects-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
-
-            .about-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .contact-grid {
-                grid-template-columns: 1fr;
-            }
-        }
-
-
-        @media (max-width: 768px) {
-
-            .navbar {
-                min-height: 70px;
-            }
-
-            .logo img {
-                height: 40px;
-                max-width: 150px;
-            }
-
-            .menu-toggle {
-                display: block;
-            }
-
-            nav {
-                position: absolute;
-                top: 70px;
-                left: 4%;
-
-                width: 92%;
-
-                display: none;
-                flex-direction: column;
-                align-items: stretch;
-
-                padding: 20px;
-
-                background: rgba(12,12,10,0.97);
-                border: 1px solid var(--border);
-                border-radius: 18px;
-
-                box-shadow: 0 20px 50px rgba(0,0,0,0.45);
-            }
-
-            nav.active {
-                display: flex;
-            }
-
-            nav a {
-                padding: 9px 5px;
-            }
-
-            .hero {
-                padding-top: 120px;
-            }
-
-            .hero h1 {
-                letter-spacing: -2px;
-            }
-
-            section {
-                padding: 80px 0;
-            }
-
-            .stats-grid {
-                grid-template-columns: 1fr 1fr;
-            }
-
-            .stat:nth-child(2) {
-                border-right: none;
-            }
-
-            .stat:nth-child(-n+2) {
-                border-bottom: 1px solid var(--border);
-            }
-
-            .why-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .cta-box {
-                padding: 50px 25px;
-            }
-
-            .footer-inner {
-                flex-direction: column;
-                text-align: center;
-            }
-        }
-
-
-        @media (max-width: 600px) {
-
-            .services-grid,
-            .projects-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .contact-form {
-                grid-template-columns: 1fr;
-            }
-
-            .form-group.full,
-            .form-submit,
-            .form-message {
-                grid-column: auto;
-            }
-
-            .stats-grid {
-                grid-template-columns: 1fr 1fr;
-            }
-
-            .hero p {
-                font-size: 16px;
-            }
-
-            .project-image {
-                height: 220px;
-            }
-        }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pixelix | Digital Creative Agency</title>
+<meta name="description" content="Pixelix is a digital creative agency offering website development, UX/UI design, social media management, video editing, graphic design, AI content creation, branding and content creation.">
+
+<style>
+:root{
+--bg:#050914;
+--bg-soft:#0a1222;
+--card:rgba(255,255,255,.045);
+--card-hover:rgba(255,255,255,.075);
+--blue:#123B73;
+--blue-light:#2F6DB5;
+--blue-bright:#4B8DDE;
+--white:#fff;
+--text:#f5f7fb;
+--muted:#9da9ba;
+--border:rgba(47,109,181,.25);
+--radius:22px;
+--transition:.35s ease
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+font-family:Arial,Helvetica,sans-serif;
+background:
+radial-gradient(circle at 15% 10%,rgba(47,109,181,.13),transparent 28%),
+radial-gradient(circle at 85% 80%,rgba(18,59,115,.14),transparent 30%),
+var(--bg);
+color:var(--text);line-height:1.6;overflow-x:hidden
+}
+a{text-decoration:none;color:inherit}
+img{max-width:100%}
+.container{width:min(1180px,92%);margin:auto}
+
+header{
+position:fixed;top:0;left:0;width:100%;z-index:1000;
+background:rgba(5,9,20,.72);backdrop-filter:blur(18px);
+-webkit-backdrop-filter:blur(18px);border-bottom:1px solid transparent;
+transition:var(--transition)
+}
+header.scrolled{border-bottom:1px solid var(--border);box-shadow:0 10px 40px rgba(0,0,0,.35)}
+.navbar{min-height:78px;display:flex;align-items:center;justify-content:space-between;gap:30px}
+.logo{display:flex;align-items:center;min-width:130px}
+.logo img{height:48px;width:auto;max-width:180px;object-fit:contain;display:block}
+nav{display:flex;align-items:center;gap:28px}
+nav a{color:#d8dee8;font-size:14px;font-weight:600;position:relative;transition:var(--transition)}
+nav a::after{content:"";position:absolute;left:0;bottom:-7px;width:0;height:2px;background:var(--blue-bright);transition:var(--transition)}
+nav a:hover{color:var(--blue-bright)}
+nav a:hover::after{width:100%}
+.nav-btn{padding:11px 18px;border:1px solid var(--blue-bright);border-radius:30px;color:#6fa7eb}
+.nav-btn:hover{background:var(--blue-bright);color:#000}
+.nav-btn::after{display:none}
+.menu-toggle{display:none;background:none;border:none;color:var(--blue-bright);font-size:28px;cursor:pointer}
+
+.hero{min-height:100vh;display:flex;align-items:center;position:relative;padding:130px 0 80px}
+.hero::before{content:"";position:absolute;width:500px;height:500px;background:rgba(47,109,181,.13);filter:blur(120px);border-radius:50%;top:10%;right:-150px;pointer-events:none}
+.hero-content{max-width:850px;position:relative;z-index:2}
+.eyebrow{display:inline-flex;align-items:center;gap:9px;color:#6fa7eb;font-size:13px;font-weight:700;text-transform:uppercase;letter-spacing:2px;margin-bottom:20px}
+.eyebrow::before{content:"";width:30px;height:1px;background:var(--blue-bright)}
+.hero h1{font-size:clamp(48px,8vw,92px);line-height:.98;letter-spacing:-4px;margin-bottom:28px}
+.hero h1 span{background:linear-gradient(90deg,#2f6db5,#79b1f5,#2f6db5);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.hero p{max-width:650px;color:var(--muted);font-size:18px;margin-bottom:38px}
+.hero-buttons{display:flex;flex-wrap:wrap;gap:14px}
+.btn{display:inline-flex;align-items:center;justify-content:center;padding:14px 24px;border-radius:40px;font-size:14px;font-weight:700;transition:var(--transition)}
+.btn-primary{background:linear-gradient(135deg,#123b73,#4b8dde);color:#fff;box-shadow:0 12px 35px rgba(47,109,181,.22)}
+.btn-primary:hover{transform:translateY(-4px);box-shadow:0 18px 45px rgba(47,109,181,.35)}
+.btn-outline{border:1px solid rgba(75,141,222,.5);color:#6fa7eb}
+.btn-outline:hover{background:rgba(47,109,181,.1);transform:translateY(-4px)}
+
+section{padding:110px 0;position:relative}
+.section-heading{margin-bottom:55px}
+.section-heading h2{font-size:clamp(34px,5vw,58px);line-height:1;margin-bottom:15px;letter-spacing:-2px}
+.section-heading p{color:var(--muted);max-width:650px}
+.section-label{color:#6fa7eb;text-transform:uppercase;letter-spacing:2px;font-size:12px;font-weight:700;margin-bottom:13px}
+
+.about-grid{display:grid;grid-template-columns:1fr 1fr;gap:70px;align-items:center}
+.about-text p{color:var(--muted);margin-bottom:18px;font-size:16px}
+.about-box{min-height:350px;border:1px solid var(--border);border-radius:var(--radius);background:linear-gradient(145deg,rgba(47,109,181,.10),rgba(255,255,255,.025));display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden}
+.about-box::before{content:"PX";position:absolute;font-size:180px;font-weight:900;color:rgba(47,109,181,.06);letter-spacing:-15px}
+.about-center{text-align:center;position:relative;z-index:2}
+.about-center strong{display:block;font-size:58px;color:var(--blue-bright)}
+.about-center span{color:var(--muted);text-transform:uppercase;letter-spacing:4px;font-size:12px}
+
+.services-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:18px}
+.service-card{min-height:230px;padding:28px;border:1px solid var(--border);border-radius:var(--radius);background:var(--card);position:relative;overflow:hidden;transition:var(--transition)}
+.service-card::before{content:"";position:absolute;width:120px;height:120px;background:rgba(47,109,181,.11);filter:blur(35px);top:-60px;right:-60px;transition:var(--transition)}
+.service-card:hover{transform:translateY(-8px);background:var(--card-hover);border-color:rgba(75,141,222,.55)}
+.service-card:hover::before{transform:scale(1.6)}
+.service-number{color:var(--blue-bright);font-size:13px;font-weight:700;margin-bottom:28px}
+.service-card h3{font-size:20px;margin-bottom:12px}
+.service-card p{color:var(--muted);font-size:14px}
+
+.projects-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
+.project-card{border:1px solid var(--border);border-radius:var(--radius);background:var(--card);overflow:hidden;transition:transform .2s ease,border .3s ease;transform-style:preserve-3d}
+.project-card:hover{border-color:rgba(75,141,222,.6)}
+.project-image{height:240px;position:relative;overflow:hidden;display:flex;align-items:center;justify-content:center}
+.project-image::before{content:"";position:absolute;width:180px;height:180px;border-radius:50%;background:rgba(47,109,181,.19);filter:blur(45px)}
+.project-image::after{content:"";position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,.60),transparent)}
+.project-label{position:absolute;left:20px;bottom:18px;z-index:2;color:#fff;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:2px}
+
+.project-web{background:radial-gradient(circle at 30% 30%,rgba(47,109,181,.3),transparent 35%),linear-gradient(135deg,#0c1728,#050505)}
+.web-window{width:68%;height:60%;background:#111;border:1px solid rgba(75,141,222,.4);border-radius:12px;box-shadow:0 20px 60px rgba(0,0,0,.7);position:relative;z-index:1}
+.web-top{height:22px;border-bottom:1px solid rgba(255,255,255,.08);display:flex;align-items:center;gap:5px;padding-left:9px}
+.web-dot{width:5px;height:5px;border-radius:50%;background:var(--blue-bright)}
+.web-body{display:flex;align-items:center;justify-content:center;height:calc(100% - 22px)}
+.web-body span{font-size:35px;font-weight:900;color:var(--blue-bright)}
+
+.project-graphic{background:linear-gradient(135deg,#080c14,#101e36)}
+.graphic-text{font-size:42px;font-weight:900;letter-spacing:-3px;color:transparent;-webkit-text-stroke:1px var(--blue-bright);transform:rotate(-8deg);position:relative;z-index:1}
+
+.project-social{background:radial-gradient(circle at center,rgba(47,109,181,.3),transparent 50%),#080c14}
+.social-card{width:55%;height:75%;border-radius:18px;background:linear-gradient(160deg,#0e1b31,#050505);border:1px solid rgba(75,141,222,.4);box-shadow:0 20px 50px rgba(0,0,0,.65);display:flex;align-items:center;justify-content:center;position:relative;z-index:1}
+.social-card span{font-weight:900;font-size:25px;color:#6fa7eb}
+
+.project-branding{background:linear-gradient(145deg,#0c1728,#050505)}
+.brand-logo{width:105px;height:105px;border:1px solid var(--blue-bright);display:flex;align-items:center;justify-content:center;border-radius:20px;transform:rotate(8deg);position:relative;z-index:1;box-shadow:0 0 35px rgba(47,109,181,.18)}
+.brand-logo span{font-size:48px;font-weight:900;color:var(--blue-bright)}
+
+.project-ai{background:radial-gradient(circle,rgba(47,109,181,.3),transparent 55%),#050505}
+.ai-symbol{font-size:72px;font-weight:900;color:#6fa7eb;text-shadow:0 0 20px rgba(75,141,222,.4);position:relative;z-index:1}
+
+.project-coming{background:linear-gradient(135deg,#080c14,#101d32)}
+.coming-symbol{font-size:75px;color:var(--blue-bright);position:relative;z-index:1;animation:float 3s ease-in-out infinite}
+@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-12px)}}
+.project-info{padding:25px}
+.project-info h3{font-size:20px;margin-bottom:8px}
+.project-info p{color:var(--muted);font-size:14px;margin-bottom:18px}
+.project-link{color:#6fa7eb;font-size:13px;font-weight:700}
+.project-link:hover{text-decoration:underline}
+
+.stats{border-top:1px solid var(--border);border-bottom:1px solid var(--border)}
+.stats-grid{display:grid;grid-template-columns:repeat(4,1fr)}
+.stat{text-align:center;padding:35px 20px;border-right:1px solid var(--border)}
+.stat:last-child{border-right:none}
+.stat strong{display:block;font-size:42px;color:#6fa7eb;margin-bottom:4px}
+.stat span{color:var(--muted);font-size:13px}
+
+.why-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.why-card{padding:35px;border-radius:var(--radius);border:1px solid var(--border);background:linear-gradient(145deg,rgba(47,109,181,.08),rgba(255,255,255,.025))}
+.why-card span{color:var(--blue-bright);font-size:25px}
+.why-card h3{margin:20px 0 10px;font-size:20px}
+.why-card p{color:var(--muted);font-size:14px}
+
+.cta-box{border:1px solid rgba(75,141,222,.4);border-radius:30px;padding:70px 50px;text-align:center;background:radial-gradient(circle at center,rgba(47,109,181,.16),transparent 60%),rgba(255,255,255,.025)}
+.cta-box h2{font-size:clamp(35px,5vw,60px);line-height:1;margin-bottom:18px}
+.cta-box p{color:var(--muted);max-width:600px;margin:0 auto 30px}
+
+.contact-grid{display:grid;grid-template-columns:.8fr 1.2fr;gap:50px}
+.contact-info h3{font-size:28px;margin-bottom:14px}
+.contact-info>p{color:var(--muted);margin-bottom:30px}
+.contact-item{margin-bottom:20px}
+.contact-item small{display:block;color:var(--blue-bright);text-transform:uppercase;font-size:10px;letter-spacing:2px;margin-bottom:4px}
+.contact-item a{color:#eee}
+.contact-item a:hover{color:#6fa7eb}
+
+.contact-form{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.form-group{display:flex;flex-direction:column;gap:7px}
+.form-group.full{grid-column:1/-1}
+.form-group label{font-size:12px;color:#ccc}
+input,select,textarea{width:100%;padding:14px 15px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.10);border-radius:12px;color:white;outline:none;font-family:inherit;transition:var(--transition)}
+select option{background:#111;color:white}
+textarea{min-height:140px;resize:vertical}
+input:focus,select:focus,textarea:focus{border-color:rgba(75,141,222,.75);box-shadow:0 0 0 3px rgba(47,109,181,.08)}
+.form-submit{grid-column:1/-1;margin-top:5px}
+.form-message{grid-column:1/-1;color:#6fa7eb;font-size:13px;display:none}
+
+footer{padding:35px 0;border-top:1px solid var(--border);margin-top:30px}
+.footer-inner{display:flex;align-items:center;justify-content:space-between;gap:20px}
+.footer-brand{color:var(--muted);font-size:13px}
+.footer-brand strong{color:#6fa7eb}
+.footer-social{display:flex;gap:20px}
+.footer-social a{color:var(--muted);font-size:13px}
+.footer-social a:hover{color:#6fa7eb}
+
+.reveal{opacity:0;transform:translateY(30px);transition:opacity .8s ease,transform .8s ease}
+.reveal.active{opacity:1;transform:translateY(0)}
+
+@media(max-width:1000px){
+.services-grid{grid-template-columns:repeat(2,1fr)}
+.projects-grid{grid-template-columns:repeat(2,1fr)}
+.about-grid{grid-template-columns:1fr}
+.contact-grid{grid-template-columns:1fr}
+}
+@media(max-width:768px){
+.navbar{min-height:70px}
+.logo img{height:40px;max-width:150px}
+.menu-toggle{display:block}
+nav{position:absolute;top:70px;left:4%;width:92%;display:none;flex-direction:column;align-items:stretch;padding:20px;background:rgba(8,14,27,.97);border:1px solid var(--border);border-radius:18px;box-shadow:0 20px 50px rgba(0,0,0,.45)}
+nav.active{display:flex}
+nav a{padding:9px 5px}
+.hero{padding-top:120px}
+.hero h1{letter-spacing:-2px}
+section{padding:80px 0}
+.stats-grid{grid-template-columns:1fr 1fr}
+.stat:nth-child(2){border-right:none}
+.stat:nth-child(-n+2){border-bottom:1px solid var(--border)}
+.why-grid{grid-template-columns:1fr}
+.cta-box{padding:50px 25px}
+.footer-inner{flex-direction:column;text-align:center}
+}
+@media(max-width:600px){
+.services-grid,.projects-grid{grid-template-columns:1fr}
+.contact-form{grid-template-columns:1fr}
+.form-group.full,.form-submit,.form-message{grid-column:auto}
+.stats-grid{grid-template-columns:1fr 1fr}
+.hero p{font-size:16px}
+.project-image{height:220px}
+}
+</style>
 </head>
-
 
 <body>
 
+<header id="header">
+<div class="container navbar">
+<a href="#home" class="logo">
+<img src="logo.png" alt="Pixelix Logo">
+</a>
 
-    <!-- =========================
-         NAVBAR
-    ========================== -->
+<button class="menu-toggle" id="menuToggle">☰</button>
 
-    <header id="header">
+<nav id="navMenu">
+<a href="#home">Home</a>
+<a href="#about">About</a>
+<a href="#services">Services</a>
+<a href="#projects">Work</a>
+<a href="#contact" class="nav-btn">Let's Talk</a>
+</nav>
+</div>
+</header>
 
-        <div class="container navbar">
+<main>
 
-            <!-- ADD YOUR LOGO HERE -->
-            <!-- Keep logo.png in the same folder as index.html -->
+<section class="hero" id="home">
+<div class="container">
+<div class="hero-content reveal">
+<div class="eyebrow">Digital Creative Agency</div>
 
-            <a href="#home" class="logo">
-                <img src="logo.png" alt="AP Visual Logo">
-            </a>
-
-
-            <button class="menu-toggle" id="menuToggle">
-                ☰
-            </button>
-
-
-            <nav id="navMenu">
-
-                <a href="#home">Home</a>
-
-                <a href="#about">About</a>
-
-                <a href="#services">Services</a>
-
-                <a href="#projects">Work</a>
-
-                <a href="#contact" class="nav-btn">
-                    Let's Talk
-                </a>
-
-            </nav>
-
-        </div>
-
-    </header>
-
-
-
-    <!-- =========================
-         HERO
-    ========================== -->
-
-    <main>
-
-        <section class="hero" id="home">
-
-            <div class="container">
-
-                <div class="hero-content reveal">
-
-                    <div class="eyebrow">
-                        Digital Creative Agency
-                    </div>
-
-                    <h1>
-                        We turn ideas
-                        <br>
-                        into <span>impact.</span>
-                    </h1>
-
-                    <p>
-                        AP Visual is a digital creative agency helping brands,
-                        businesses and creators build powerful digital identities
-                        through design, technology, content and creativity.
-                    </p>
-
-                    <div class="hero-buttons">
-
-                        <a href="#projects" class="btn btn-primary">
-                            View Our Work
-                        </a>
-
-                        <a href="#contact" class="btn btn-outline">
-                            Start a Project
-                        </a>
-
-                    </div>
-
-                </div>
-
-            </div>
-
-        </section>
-
-
-
-        <!-- =========================
-             ABOUT
-        ========================== -->
-
-        <section id="about">
-
-            <div class="container">
-
-                <div class="section-heading reveal">
-
-                    <div class="section-label">
-                        About AP Visual
-                    </div>
-
-                    <h2>
-                        Creative thinking.
-                        <br>
-                        Digital execution.
-                    </h2>
-
-                </div>
-
-
-                <div class="about-grid">
-
-                    <div class="about-text reveal">
-
-                        <p>
-                            AP Visual is a creative digital agency focused on
-                            building modern, engaging and result-driven digital
-                            experiences.
-                        </p>
-
-                        <p>
-                            From websites and UI/UX design to social media,
-                            branding, video editing and AI-powered content,
-                            we bring creativity and technology together.
-                        </p>
-
-                        <p>
-                            Our goal is simple — help your brand look better,
-                            communicate better and grow digitally.
-                        </p>
-
-                    </div>
-
-
-                    <div class="about-box reveal">
-
-                        <div class="about-center">
-
-                            <strong>AP</strong>
-
-                            <span>
-                                Visual
-                            </span>
-
-                        </div>
-
-                    </div>
-
-                </div>
-
-            </div>
-
-        </section>
-
-
-
-        <!-- =========================
-             SERVICES
-        ========================== -->
-
-        <section id="services">
-
-            <div class="container">
-
-                <div class="section-heading reveal">
-
-                    <div class="section-label">
-                        What We Do
-                    </div>
-
-                    <h2>
-                        Our Services
-                    </h2>
-
-                    <p>
-                        Everything your brand needs to build a strong and
-                        memorable digital presence.
-                    </p>
-
-                </div>
-
-
-                <div class="services-grid">
-
-
-                    <div class="service-card reveal">
-
-                        <div class="service-number">
-                            01
-                        </div>
-
-                        <h3>
-                            Website Development
-                        </h3>
-
-                        <p>
-                            Modern, responsive and user-focused websites
-                            designed to represent your brand professionally.
-                        </p>
-
-                    </div>
-
-
-                    <div class="service-card reveal">
-
-                        <div class="service-number">
-                            02
-                        </div>
-
-                        <h3>
-                            UX/UI Design
-                        </h3>
-
-                        <p>
-                            Clean, intuitive and visually engaging interfaces
-                            that provide a better digital experience.
-                        </p>
-
-                    </div>
-
-
-                    <div class="service-card reveal">
-
-                        <div class="service-number">
-                            03
-                        </div>
-
-                        <h3>
-                            Social Media Management
-                        </h3>
-
-                        <p>
-                            Strategic content and social media management
-                            designed to increase visibility and engagement.
-                        </p>
-
-                    </div>
-
-
-                    <div class="service-card reveal">
-
-                        <div class="service-number">
-                            04
-                        </div>
-
-                        <h3>
-                            Video Editing
-                        </h3>
-
-                        <p>
-                            Engaging videos, reels and short-form content
-                            created to capture attention.
-                        </p>
-
-                    </div>
-
-
-                    <div class="service-card reveal">
-
-                        <div class="service-number">
-                            05
-                        </div>
-
-                        <h3>
-                            Graphic & Thumbnail Design
-                        </h3>
-
-                        <p>
-                            Eye-catching graphics and thumbnails that make
-                            your content stand out.
-                        </p>
-
-                    </div>
-
-
-                    <div class="service-card reveal">
-
-                        <div class="service-number">
-                            06
-                        </div>
-
-                        <h3>
-                            AI Content Creation
-                        </h3>
-
-                        <p>
-                            Creative AI-powered visuals and content for
-                            modern digital campaigns.
-                        </p>
-
-                    </div>
-
-
-                    <div class="service-card reveal">
-
-                        <div class="service-number">
-                            07
-                        </div>
-
-                        <h3>
-                            Branding & Logo Design
-                        </h3>
-
-                        <p>
-                            Complete visual identities that help businesses
-                            build recognition and trust.
-                        </p>
-
-                    </div>
-
-
-                    <div class="service-card reveal">
-
-                        <div class="service-number">
-                            08
-                        </div>
-
-                        <h3>
-                            Content Creation
-                        </h3>
-
-                        <p>
-                            Creative and engaging content tailored for your
-                            brand and audience.
-                        </p>
-
-                    </div>
-
-
-                </div>
-
-            </div>
-
-        </section>
-
-
-
-        <!-- =========================
-             SELECTED WORK
-        ========================== -->
-
-        <section id="projects">
-
-            <div class="container">
-
-                <div class="section-heading reveal">
-
-                    <div class="section-label">
-                        Selected Work
-                    </div>
-
-                    <h2>
-                        Projects that speak.
-                    </h2>
-
-                    <p>
-                        A selection of our digital, creative and branding work.
-                    </p>
-
-                </div>
-
-
-                <div class="projects-grid">
-
-
-                    <!-- PROJECT 1 -->
-
-                    <div class="project-card reveal">
-
-                        <div class="project-image project-web">
-
-                            <div class="web-window">
-
-                                <div class="web-top">
-
-                                    <span class="web-dot"></span>
-                                    <span class="web-dot"></span>
-                                    <span class="web-dot"></span>
-
-                                </div>
-
-                                <div class="web-body">
-                                    <span>AP</span>
-                                </div>
-
-                            </div>
-
-                            <div class="project-label">
-                                Web Development
-                            </div>
-
-                        </div>
-
-
-                        <div class="project-info">
-
-                            <h3>
-                                Web Development
-                            </h3>
-
-                            <p>
-                                Modern responsive website development.
-                            </p>
-
-                            <a
-                                href="https://ankeshtiwari149-cpu.github.io/anzovisual/#projects"
-                                target="_blank"
-                                class="project-link"
-                            >
-                                View Project →
-                            </a>
-
-                        </div>
-
-                    </div>
-
-
-
-                    <!-- PROJECT 2 -->
-
-                    <div class="project-card reveal">
-
-                        <div class="project-image project-graphic">
-
-                            <div class="graphic-text">
-                                CREATIVE
-                            </div>
-
-                            <div class="project-label">
-                                Graphic Design
-                            </div>
-
-                        </div>
-
-
-                        <div class="project-info">
-
-                            <h3>
-                                Graphic Design
-                            </h3>
-
-                            <p>
-                                Creative visual designs and digital artwork.
-                            </p>
-
-                            <a
-                                href="https://www.instagram.com/_yappprince?igsi=MjZwOHJnc2g1NHNu"
-                                target="_blank"
-                                class="project-link"
-                            >
-                                View Project →
-                            </a>
-
-                        </div>
-
-                    </div>
-
-
-
-                    <!-- PROJECT 3 -->
-
-                    <div class="project-card reveal">
-
-                        <div class="project-image project-social">
-
-                            <div class="social-card">
-                                <span>SOCIAL</span>
-                            </div>
-
-                            <div class="project-label">
-                                Social Media
-                            </div>
-
-                        </div>
-
-
-                        <div class="project-info">
-
-                            <h3>
-                                Social Media Management
-                            </h3>
-
-                            <p>
-                                Social media growth and content management.
-                            </p>
-
-                            <a
-                                href="https://www.instagram.com/ankesh_tiwari.1?igsi=N3R5c3ZwcWVxcnFh&utm_source=qr"
-                                target="_blank"
-                                class="project-link"
-                            >
-                                View Project →
-                            </a>
-
-                        </div>
-
-                    </div>
-
-
-
-                    <!-- PROJECT 4 -->
-
-                    <div class="project-card reveal">
-
-                        <div class="project-image project-branding">
-
-                            <div class="brand-logo">
-                                <span>B</span>
-                            </div>
-
-                            <div class="project-label">
-                                Branding
-                            </div>
-
-                        </div>
-
-
-                        <div class="project-info">
-
-                            <h3>
-                                Branding & Logo Design
-                            </h3>
-
-                            <p>
-                                Brand identity and logo design solutions.
-                            </p>
-
-                            <a
-                                href="https://www.instagram.com/bulidchem.solutions?igsi=NnA0NnNiZjBrcncx"
-                                target="_blank"
-                                class="project-link"
-                            >
-                                View Project →
-                            </a>
-
-                        </div>
-
-                    </div>
-
-
-
-                    <!-- PROJECT 5 -->
-
-                    <div class="project-card reveal">
-
-                        <div class="project-image project-ai">
-
-                            <div class="ai-symbol">
-                                AI
-                            </div>
-
-                            <div class="project-label">
-                                AI Content
-                            </div>
-
-                        </div>
-
-
-                        <div class="project-info">
-
-                            <h3>
-                                AI Content Creation
-                            </h3>
-
-                            <p>
-                                AI-powered creative content and visuals.
-                            </p>
-
-                            <a
-                                href="https://www.instagram.com/reel/Dc3d8iTyBoy/"
-                                target="_blank"
-                                class="project-link"
-                            >
-                                View Project →
-                            </a>
-
-                        </div>
-
-                    </div>
-
-
-
-                    <!-- PROJECT 6 -->
-
-                    <div class="project-card reveal">
-
-                        <div class="project-image project-coming">
-
-                            <div class="coming-symbol">
-                                ✦
-                            </div>
-
-                            <div class="project-label">
-                                Coming Soon
-                            </div>
-
-                        </div>
-
-
-                        <div class="project-info">
-
-                            <h3>
-                                More Coming Soon
-                            </h3>
-
-                            <p>
-                                New creative projects are on the way.
-                            </p>
-
-                        </div>
-
-                    </div>
-
-
-                </div>
-
-            </div>
-
-        </section>
-
-
-
-        <!-- =========================
-             STATS
-        ========================== -->
-
-        <section class="stats">
-
-            <div class="container">
-
-                <div class="stats-grid">
-
-                    <div class="stat reveal">
-
-                        <strong>8+</strong>
-
-                        <span>
-                            Digital Services
-                        </span>
-
-                    </div>
-
-
-                    <div class="stat reveal">
-
-                        <strong>6+</strong>
-
-                        <span>
-                            Selected Projects
-                        </span>
-
-                    </div>
-
-
-                    <div class="stat reveal">
-
-                        <strong>100%</strong>
-
-                        <span>
-                            Creative Focus
-                        </span>
-
-                    </div>
-
-
-                    <div class="stat reveal">
-
-                        <strong>24/7</strong>
-
-                        <span>
-                            Digital Mindset
-                        </span>
-
-                    </div>
-
-                </div>
-
-            </div>
-
-        </section>
-
-
-
-        <!-- =========================
-             WHY AP VISUAL
-        ========================== -->
-
-        <section>
-
-            <div class="container">
-
-                <div class="section-heading reveal">
-
-                    <div class="section-label">
-                        Why AP Visual
-                    </div>
-
-                    <h2>
-                        More than just design.
-                    </h2>
-
-                    <p>
-                        We focus on creativity, quality and the bigger picture.
-                    </p>
-
-                </div>
-
-
-                <div class="why-grid">
-
-
-                    <div class="why-card reveal">
-
-                        <span>
-                            ✦
-                        </span>
-
-                        <h3>
-                            Creative First
-                        </h3>
-
-                        <p>
-                            We focus on ideas that make brands different,
-                            memorable and visually strong.
-                        </p>
-
-                    </div>
-
-
-                    <div class="why-card reveal">
-
-                        <span>
-                            ◇
-                        </span>
-
-                        <h3>
-                            Modern Approach
-                        </h3>
-
-                        <p>
-                            We use modern digital tools, technology and
-                            creative trends to build better experiences.
-                        </p>
-
-                    </div>
-
-
-                    <div class="why-card reveal">
-
-                        <span>
-                            ↗
-                        </span>
-
-                        <h3>
-                            Result Focused
-                        </h3>
-
-                        <p>
-                            Every project is designed with your audience,
-                            goals and growth in mind.
-                        </p>
-
-                    </div>
-
-
-                </div>
-
-            </div>
-
-        </section>
-
-
-
-        <!-- =========================
-             CTA
-        ========================== -->
-
-        <section>
-
-            <div class="container">
-
-                <div class="cta-box reveal">
-
-                    <h2>
-                        Have an idea?
-                        <br>
-                        Let's build it.
-                    </h2>
-
-                    <p>
-                        Tell us what you're working on and let's create
-                        something impactful together.
-                    </p>
-
-                    <a
-                        href="#contact"
-                        class="btn btn-primary"
-                    >
-                        Start a Project
-                    </a>
-
-                </div>
-
-            </div>
-
-        </section>
-
-
-
-        <!-- =========================
-             CONTACT
-        ========================== -->
-
-        <section id="contact">
-
-            <div class="container">
-
-                <div class="section-heading reveal">
-
-                    <div class="section-label">
-                        Contact
-                    </div>
-
-                    <h2>
-                        Let's talk.
-                    </h2>
-
-                    <p>
-                        Have a project in mind? Send us the details and
-                        we'll get back to you.
-                    </p>
-
-                </div>
-
-
-                <div class="contact-grid">
-
-
-                    <div class="contact-info reveal">
-
-                        <h3>
-                            Start a conversation.
-                        </h3>
-
-                        <p>
-                            Whether you need a website, branding, content,
-                            social media management or something completely
-                            custom — we're ready to hear your idea.
-                        </p>
-
-
-                        <div class="contact-item">
-
-                            <small>
-                                Email
-                            </small>
-
-                            <a href="mailto:apvisual149@gmail.com">
-                                apvisual149@gmail.com
-                            </a>
-
-                        </div>
-
-
-                        <div class="contact-item">
-
-                            <small>
-                                Phone
-                            </small>
-
-                            <a href="tel:8595048494">
-                                8595048494
-                            </a>
-
-                            <br>
-
-                            <a href="tel:9910969049">
-                                9910969049
-                            </a>
-
-                        </div>
-
-
-                        <div class="contact-item">
-
-                            <small>
-                                Instagram
-                            </small>
-
-                            <a
-                                href="https://www.instagram.com/apvisual149?igsi=MTdpdTF5MWtxdW94MQ%3D%3D&utm_source=qr"
-                                target="_blank"
-                            >
-                                @apvisual149
-                            </a>
-
-                        </div>
-
-                    </div>
-
-
-
-                    <!-- CONTACT FORM -->
-
-                    <form class="contact-form reveal" id="contactForm">
-
-
-                        <div class="form-group">
-
-                            <label>
-                                Name
-                            </label>
-
-                            <input
-                                type="text"
-                                id="name"
-                                placeholder="Your name"
-                                required
-                            >
-
-                        </div>
-
-
-                        <div class="form-group">
-
-                            <label>
-                                Email
-                            </label>
-
-                            <input
-                                type="email"
-                                id="email"
-                                placeholder="Your email"
-                                required
-                            >
-
-                        </div>
-
-
-                        <div class="form-group">
-
-                            <label>
-                                Phone
-                            </label>
-
-                            <input
-                                type="tel"
-                                id="phone"
-                                placeholder="Your phone number"
-                            >
-
-                        </div>
-
-
-                        <div class="form-group">
-
-                            <label>
-                                Service
-                            </label>
-
-                            <select id="service">
-
-                                <option value="">
-                                    Select service
-                                </option>
-
-                                <option>
-                                    Website Development
-                                </option>
-
-                                <option>
-                                    UX/UI Design
-                                </option>
-
-                                <option>
-                                    Social Media Management
-                                </option>
-
-                                <option>
-                                    Video Editing
-                                </option>
-
-                                <option>
-                                    Graphic & Thumbnail Design
-                                </option>
-
-                                <option>
-                                    AI Content Creation
-                                </option>
-
-                                <option>
-                                    Branding & Logo Design
-                                </option>
-
-                                <option>
-                                    Content Creation
-                                </option>
-
-                            </select>
-
-                        </div>
-
-
-                        <div class="form-group">
-
-                            <label>
-                                Budget
-                            </label>
-
-                            <select id="budget">
-
-                                <option value="">
-                                    Select budget
-                                </option>
-
-                                <option>
-                                    ₹5,000 - ₹10,000
-                                </option>
-
-                                <option>
-                                    ₹10,000 - ₹25,000
-                                </option>
-
-                                <option>
-                                    ₹25,000 - ₹50,000
-                                </option>
-
-                                <option>
-                                    ₹50,000+
-                                </option>
-
-                            </select>
-
-                        </div>
-
-
-                        <div class="form-group full">
-
-                            <label>
-                                Project Details
-                            </label>
-
-                            <textarea
-                                id="details"
-                                placeholder="Tell us about your project..."
-                                required
-                            ></textarea>
-
-                        </div>
-
-
-                        <div
-                            class="form-message"
-                            id="formMessage"
-                        ></div>
-
-
-                        <div class="form-submit">
-
-                            <button
-                                type="submit"
-                                class="btn btn-primary"
-                            >
-                                Send Inquiry →
-                            </button>
-
-                        </div>
-
-
-                    </form>
-
-                </div>
-
-            </div>
-
-        </section>
-
-    </main>
-
-
-
-    <!-- =========================
-         FOOTER
-    ========================== -->
-
-    <footer>
-
-        <div class="container">
-
-            <div class="footer-inner">
-
-
-                <div class="footer-brand">
-
-                    © 2026
-                    <strong>AP Visual</strong>.
-                    All rights reserved.
-
-                </div>
-
-
-                <div class="footer-social">
-
-                    <a
-                        href="https://www.instagram.com/apvisual149?igsi=MTdpdTF5MWtxdW94MQ%3D%3D&utm_source=qr"
-                        target="_blank"
-                    >
-                        Instagram
-                    </a>
-
-                    <a href="#home">
-                        Back to top ↑
-                    </a>
-
-                </div>
-
-
-            </div>
-
-        </div>
-
-    </footer>
-
-
-
-    <!-- =========================
-         JAVASCRIPT
-    ========================== -->
-
-    <script>
-
-        /* =========================
-           NAVBAR SCROLL
-        ========================== */
-
-        const header = document.getElementById("header");
-
-        window.addEventListener("scroll", () => {
-
-            if (window.scrollY > 30) {
-                header.classList.add("scrolled");
-            } else {
-                header.classList.remove("scrolled");
-            }
-
-        });
-
-
-
-        /* =========================
-           MOBILE MENU
-        ========================== */
-
-        const menuToggle =
-            document.getElementById("menuToggle");
-
-        const navMenu =
-            document.getElementById("navMenu");
-
-
-        menuToggle.addEventListener("click", () => {
-
-            navMenu.classList.toggle("active");
-
-        });
-
-
-        document.querySelectorAll("nav a").forEach(link => {
-
-            link.addEventListener("click", () => {
-
-                navMenu.classList.remove("active");
-
-            });
-
-        });
-
-
-
-        /* =========================
-           SCROLL REVEAL
-        ========================== */
-
-        const reveals =
-            document.querySelectorAll(".reveal");
-
-
-        const revealObserver =
-            new IntersectionObserver(
-
-                entries => {
-
-                    entries.forEach(entry => {
-
-                        if (entry.isIntersecting) {
-
-                            entry.target.classList.add("active");
-
-                            revealObserver.unobserve(
-                                entry.target
-                            );
-
-                        }
-
-                    });
-
-                },
-
-                {
-                    threshold: 0.12
-                }
-
-            );
-
-
-        reveals.forEach(element => {
-
-            revealObserver.observe(element);
-
-        });
-
-
-
-        /* =========================
-           PROJECT 3D HOVER
-        ========================== */
-
-        const projectCards =
-            document.querySelectorAll(".project-card");
-
-
-        projectCards.forEach(card => {
-
-            card.addEventListener("mousemove", e => {
-
-                const rect =
-                    card.getBoundingClientRect();
-
-                const x =
-                    e.clientX - rect.left;
-
-                const y =
-                    e.clientY - rect.top;
-
-
-                const centerX =
-                    rect.width / 2;
-
-                const centerY =
-                    rect.height / 2;
-
-
-                const rotateX =
-                    ((y - centerY) / centerY) * -3;
-
-
-                const rotateY =
-                    ((x - centerX) / centerX) * 3;
-
-
-                card.style.transform =
-                    `perspective(900px)
-                     rotateX(${rotateX}deg)
-                     rotateY(${rotateY}deg)
-                     translateY(-5px)`;
-
-            });
-
-
-            card.addEventListener("mouseleave", () => {
-
-                card.style.transform =
-                    "perspective(900px) rotateX(0) rotateY(0) translateY(0)";
-
-            });
-
-        });
-
-
-
-        /* =========================
-           CONTACT FORM
-        ========================== */
-
-        const contactForm =
-            document.getElementById("contactForm");
-
-
-        const formMessage =
-            document.getElementById("formMessage");
-
-
-        contactForm.addEventListener("submit", function(e) {
-
-            e.preventDefault();
-
-
-            const name =
-                document.getElementById("name").value.trim();
-
-
-            const email =
-                document.getElementById("email").value.trim();
-
-
-            const phone =
-                document.getElementById("phone").value.trim();
-
-
-            const service =
-                document.getElementById("service").value;
-
-
-            const budget =
-                document.getElementById("budget").value;
-
-
-            const details =
-                document.getElementById("details").value.trim();
-
-
-            if (!name || !email || !details) {
-
-                formMessage.style.display = "block";
-
-                formMessage.textContent =
-                    "Please fill in all required fields.";
-
-                return;
-
-            }
-
-
-            const subject =
-                encodeURIComponent(
-                    "New Project Inquiry - AP Visual"
-                );
-
-
-            const body =
-                encodeURIComponent(
-
-                    `Hello AP Visual,
+<h1>
+We turn ideas
+<br>
+into <span>impact.</span>
+</h1>
+
+<p>
+Pixelix is a digital creative agency helping brands,
+businesses and creators build powerful digital identities
+through design, technology, content and creativity.
+</p>
+
+<div class="hero-buttons">
+<a href="#projects" class="btn btn-primary">View Our Work</a>
+<a href="#contact" class="btn btn-outline">Start a Project</a>
+</div>
+</div>
+</div>
+</section>
+
+<section id="about">
+<div class="container">
+
+<div class="section-heading reveal">
+<div class="section-label">About Pixelix</div>
+<h2>Creative thinking.<br>Digital execution.</h2>
+</div>
+
+<div class="about-grid">
+
+<div class="about-text reveal">
+<p>Pixelix is a creative digital agency focused on building modern, engaging and result-driven digital experiences.</p>
+
+<p>From websites and UI/UX design to social media, branding, video editing and AI-powered content, we bring creativity and technology together.</p>
+
+<p>Our goal is simple — help your brand look better, communicate better and grow digitally.</p>
+</div>
+
+<div class="about-box reveal">
+<div class="about-center">
+<strong>PX</strong>
+<span>Pixelix</span>
+</div>
+</div>
+
+</div>
+</div>
+</section>
+
+<section id="services">
+<div class="container">
+
+<div class="section-heading reveal">
+<div class="section-label">What We Do</div>
+<h2>Our Services</h2>
+<p>Everything your brand needs to build a strong and memorable digital presence.</p>
+</div>
+
+<div class="services-grid">
+
+<div class="service-card reveal"><div class="service-number">01</div><h3>Website Development</h3><p>Modern, responsive and user-focused websites designed to represent your brand professionally.</p></div>
+
+<div class="service-card reveal"><div class="service-number">02</div><h3>UX/UI Design</h3><p>Clean, intuitive and visually engaging interfaces that provide a better digital experience.</p></div>
+
+<div class="service-card reveal"><div class="service-number">03</div><h3>Social Media Management</h3><p>Strategic content and social media management designed to increase visibility and engagement.</p></div>
+
+<div class="service-card reveal"><div class="service-number">04</div><h3>Video Editing</h3><p>Engaging videos, reels and short-form content created to capture attention.</p></div>
+
+<div class="service-card reveal"><div class="service-number">05</div><h3>Graphic & Thumbnail Design</h3><p>Eye-catching graphics and thumbnails that make your content stand out.</p></div>
+
+<div class="service-card reveal"><div class="service-number">06</div><h3>AI Content Creation</h3><p>Creative AI-powered visuals and content for modern digital campaigns.</p></div>
+
+<div class="service-card reveal"><div class="service-number">07</div><h3>Branding & Logo Design</h3><p>Complete visual identities that help businesses build recognition and trust.</p></div>
+
+<div class="service-card reveal"><div class="service-number">08</div><h3>Content Creation</h3><p>Creative and engaging content tailored for your brand and audience.</p></div>
+
+</div>
+</div>
+</section>
+
+<section id="projects">
+<div class="container">
+
+<div class="section-heading reveal">
+<div class="section-label">Selected Work</div>
+<h2>Projects that speak.</h2>
+<p>A selection of our digital, creative and branding work.</p>
+</div>
+
+<div class="projects-grid">
+
+<div class="project-card reveal">
+<div class="project-image project-web">
+<div class="web-window">
+<div class="web-top"><span class="web-dot"></span><span class="web-dot"></span><span class="web-dot"></span></div>
+<div class="web-body"><span>PX</span></div>
+</div>
+<div class="project-label">Web Development</div>
+</div>
+<div class="project-info">
+<h3>Web Development</h3>
+<p>Modern responsive website development.</p>
+<a href="https://ankeshtiwari149-cpu.github.io/anzovisual/#projects" target="_blank" class="project-link">View Project →</a>
+</div>
+</div>
+
+<div class="project-card reveal">
+<div class="project-image project-graphic">
+<div class="graphic-text">CREATIVE</div>
+<div class="project-label">Graphic Design</div>
+</div>
+<div class="project-info">
+<h3>Graphic Design</h3>
+<p>Creative visual designs and digital artwork.</p>
+<a href="https://www.instagram.com/_yappprince?igsi=MjZwOHJnc2g1NHNu" target="_blank" class="project-link">View Project →</a>
+</div>
+</div>
+
+<div class="project-card reveal">
+<div class="project-image project-social">
+<div class="social-card"><span>SOCIAL</span></div>
+<div class="project-label">Social Media</div>
+</div>
+<div class="project-info">
+<h3>Social Media Management</h3>
+<p>Social media growth and content management.</p>
+<a href="https://www.instagram.com/ankesh_tiwari.1?igsi=N3R5c3ZwcWVxcnFh&utm_source=qr" target="_blank" class="project-link">View Project →</a>
+</div>
+</div>
+
+<div class="project-card reveal">
+<div class="project-image project-branding">
+<div class="brand-logo"><span>B</span></div>
+<div class="project-label">Branding</div>
+</div>
+<div class="project-info">
+<h3>Branding & Logo Design</h3>
+<p>Brand identity and logo design solutions.</p>
+<a href="https://www.instagram.com/bulidchem.solutions?igsi=NnA0NnNiZjBrcncx" target="_blank" class="project-link">View Project →</a>
+</div>
+</div>
+
+<div class="project-card reveal">
+<div class="project-image project-ai">
+<div class="ai-symbol">AI</div>
+<div class="project-label">AI Content</div>
+</div>
+<div class="project-info">
+<h3>AI Content Creation</h3>
+<p>AI-powered creative content and visuals.</p>
+<a href="https://www.instagram.com/reel/Dc3d8iTyBoy/" target="_blank" class="project-link">View Project →</a>
+</div>
+</div>
+
+<div class="project-card reveal">
+<div class="project-image project-coming">
+<div class="coming-symbol">✦</div>
+<div class="project-label">Coming Soon</div>
+</div>
+<div class="project-info">
+<h3>More Coming Soon</h3>
+<p>New creative projects are on the way.</p>
+</div>
+</div>
+
+</div>
+</div>
+</section>
+
+<section class="stats">
+<div class="container">
+<div class="stats-grid">
+<div class="stat reveal"><strong>8+</strong><span>Digital Services</span></div>
+<div class="stat reveal"><strong>6+</strong><span>Selected Projects</span></div>
+<div class="stat reveal"><strong>100%</strong><span>Creative Focus</span></div>
+<div class="stat reveal"><strong>24/7</strong><span>Digital Mindset</span></div>
+</div>
+</div>
+</section>
+
+<section>
+<div class="container">
+
+<div class="section-heading reveal">
+<div class="section-label">Why Pixelix</div>
+<h2>More than just design.</h2>
+<p>We focus on creativity, quality and the bigger picture.</p>
+</div>
+
+<div class="why-grid">
+
+<div class="why-card reveal">
+<span>✦</span>
+<h3>Creative First</h3>
+<p>We focus on ideas that make brands different, memorable and visually strong.</p>
+</div>
+
+<div class="why-card reveal">
+<span>◇</span>
+<h3>Modern Approach</h3>
+<p>We use modern digital tools, technology and creative trends to build better experiences.</p>
+</div>
+
+<div class="why-card reveal">
+<span>↗</span>
+<h3>Result Focused</h3>
+<p>Every project is designed with your audience, goals and growth in mind.</p>
+</div>
+
+</div>
+</div>
+</section>
+
+<section>
+<div class="container">
+<div class="cta-box reveal">
+<h2>Have an idea?<br>Let's build it.</h2>
+<p>Tell us what you're working on and let's create something impactful together.</p>
+<a href="#contact" class="btn btn-primary">Start a Project</a>
+</div>
+</div>
+</section>
+
+<section id="contact">
+<div class="container">
+
+<div class="section-heading reveal">
+<div class="section-label">Contact</div>
+<h2>Let's talk.</h2>
+<p>Have a project in mind? Send us the details and we'll get back to you.</p>
+</div>
+
+<div class="contact-grid">
+
+<div class="contact-info reveal">
+<h3>Start a conversation.</h3>
+<p>Whether you need a website, branding, content, social media management or something completely custom — we're ready to hear your idea.</p>
+
+<div class="contact-item">
+<small>Email</small>
+<a href="mailto:apvisual149@gmail.com">apvisual149@gmail.com</a>
+</div>
+
+<div class="contact-item">
+<small>Phone</small>
+<a href="tel:8595048494">8595048494</a><br>
+<a href="tel:9910969049">9910969049</a>
+</div>
+
+<div class="contact-item">
+<small>Instagram</small>
+<a href="https://www.instagram.com/apvisual149?igsi=MTdpdTF5MWtxdW94MQ%3D%3D&utm_source=qr" target="_blank">@apvisual149</a>
+</div>
+</div>
+
+<form class="contact-form reveal" id="contactForm">
+
+<div class="form-group">
+<label>Name</label>
+<input type="text" id="name" placeholder="Your name" required>
+</div>
+
+<div class="form-group">
+<label>Email</label>
+<input type="email" id="email" placeholder="Your email" required>
+</div>
+
+<div class="form-group">
+<label>Phone</label>
+<input type="tel" id="phone" placeholder="Your phone number">
+</div>
+
+<div class="form-group">
+<label>Service</label>
+<select id="service">
+<option value="">Select service</option>
+<option>Website Development</option>
+<option>UX/UI Design</option>
+<option>Social Media Management</option>
+<option>Video Editing</option>
+<option>Graphic & Thumbnail Design</option>
+<option>AI Content Creation</option>
+<option>Branding & Logo Design</option>
+<option>Content Creation</option>
+</select>
+</div>
+
+<div class="form-group">
+<label>Budget</label>
+<select id="budget">
+<option value="">Select budget</option>
+<option>₹5,000 - ₹10,000</option>
+<option>₹10,000 - ₹25,000</option>
+<option>₹25,000 - ₹50,000</option>
+<option>₹50,000+</option>
+</select>
+</div>
+
+<div class="form-group full">
+<label>Project Details</label>
+<textarea id="details" placeholder="Tell us about your project..." required></textarea>
+</div>
+
+<div class="form-message" id="formMessage"></div>
+
+<div class="form-submit">
+<button type="submit" class="btn btn-primary">Send Inquiry →</button>
+</div>
+
+</form>
+</div>
+</div>
+</section>
+
+</main>
+
+<footer>
+<div class="container">
+<div class="footer-inner">
+<div class="footer-brand">© 2026 <strong>Pixelix</strong>. All rights reserved.</div>
+<div class="footer-social">
+<a href="https://www.instagram.com/apvisual149?igsi=MTdpdTF5MWtxdW94MQ%3D%3D&utm_source=qr" target="_blank">Instagram</a>
+<a href="#home">Back to top ↑</a>
+</div>
+</div>
+</div>
+</footer>
+
+<script>
+const header=document.getElementById("header");
+
+window.addEventListener("scroll",()=>{
+if(window.scrollY>30) header.classList.add("scrolled");
+else header.classList.remove("scrolled");
+});
+
+const menuToggle=document.getElementById("menuToggle");
+const navMenu=document.getElementById("navMenu");
+
+menuToggle.addEventListener("click",()=>{
+navMenu.classList.toggle("active");
+});
+
+document.querySelectorAll("nav a").forEach(link=>{
+link.addEventListener("click",()=>{
+navMenu.classList.remove("active");
+});
+});
+
+const reveals=document.querySelectorAll(".reveal");
+
+const revealObserver=new IntersectionObserver(entries=>{
+entries.forEach(entry=>{
+if(entry.isIntersecting){
+entry.target.classList.add("active");
+revealObserver.unobserve(entry.target);
+}
+});
+},{threshold:.12});
+
+reveals.forEach(element=>revealObserver.observe(element));
+
+const projectCards=document.querySelectorAll(".project-card");
+
+projectCards.forEach(card=>{
+
+card.addEventListener("mousemove",e=>{
+
+const rect=card.getBoundingClientRect();
+const x=e.clientX-rect.left;
+const y=e.clientY-rect.top;
+
+const centerX=rect.width/2;
+const centerY=rect.height/2;
+
+const rotateX=((y-centerY)/centerY)*-3;
+const rotateY=((x-centerX)/centerX)*3;
+
+card.style.transform=
+`perspective(900px)
+rotateX(${rotateX}deg)
+rotateY(${rotateY}deg)
+translateY(-5px)`;
+});
+
+card.addEventListener("mouseleave",()=>{
+card.style.transform=
+"perspective(900px) rotateX(0) rotateY(0) translateY(0)";
+});
+
+});
+
+const contactForm=document.getElementById("contactForm");
+const formMessage=document.getElementById("formMessage");
+
+contactForm.addEventListener("submit",function(e){
+
+e.preventDefault();
+
+const name=document.getElementById("name").value.trim();
+const email=document.getElementById("email").value.trim();
+const phone=document.getElementById("phone").value.trim();
+const service=document.getElementById("service").value;
+const budget=document.getElementById("budget").value;
+const details=document.getElementById("details").value.trim();
+
+if(!name||!email||!details){
+
+formMessage.style.display="block";
+formMessage.textContent="Please fill in all required fields.";
+return;
+}
+
+const subject=encodeURIComponent("New Project Inquiry - Pixelix");
+
+const body=encodeURIComponent(
+`Hello Pixelix,
 
 Name: ${name}
 Email: ${email}
@@ -2581,22 +668,16 @@ Project Details:
 ${details}
 
 Thank you.`
+);
 
-                );
+formMessage.style.display="block";
+formMessage.textContent="Opening your email application...";
 
+window.location.href=
+`mailto:apvisual149@gmail.com?subject=${subject}&body=${body}`;
 
-            formMessage.style.display = "block";
-
-            formMessage.textContent =
-                "Opening your email application...";
-
-
-            window.location.href =
-                `mailto:apvisual149@gmail.com?subject=${subject}&body=${body}`;
-
-        });
-
-    </script>
+});
+</script>
 
 </body>
 </html>
